@@ -1,3 +1,7 @@
+export interface ErrorProps {
+  error: Error;
+  reset: () => void;
+}
 export interface APIResults {
   products: Product[];
 }

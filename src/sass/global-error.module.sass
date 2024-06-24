@@ -1,0 +1,34 @@
+.Error
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  &__title
+    font-size: 5rem
+    font-weight: 900
+    margin: 0
+    background-image: linear-gradient(270deg, #4f56ff, #ff4980)
+    background-clip: text
+    -webkit-text-fill-color: transparent
+  &__message
+    font-size: 1.5rem
+  &__button
+    display: block
+    width: fit-content
+    font-weight: 700
+    text-decoration: none
+    margin-top: 1rem
+    padding: 0.5rem 1rem
+    border: none
+    border-radius: 0.5rem
+    background: linear-gradient(270deg, var(--c1, #4f56ff), var(--c2, #ff4980) 51%, var(--c1, #4f56ff)) var(--x, 0)/200%
+    font-size: 1.2rem
+    cursor: pointer
+    color: white
+    margin-top: auto
+    transition: all 0.5s ease-in-out
+    --c1: #4f56ff
+    --c2: #ff4980
+    &:hover
+      --x: 100%
+      transform: scale(1.1)
