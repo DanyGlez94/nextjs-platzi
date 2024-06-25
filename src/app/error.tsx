@@ -11,7 +11,9 @@ export default function GlobalError({ reset }: ErrorProps) {
       <p className={styles.Error__message}>
         Sorry, we are unable to process your request at this moment.
       </p>
-      <button className={styles.Error__button} onClick={reset}>Retry</button>
+      <button className={styles.Error__button} onClick={reset}>
+        Retry
+      </button>
     </main>
   );
 }
