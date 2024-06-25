@@ -1,3 +1,5 @@
+'use client';
+
 import { Hero } from 'app/components/home/Hero';
 import { Description } from 'app/components/home/Description';
 
@@ -6,6 +8,7 @@ export default function HomeLayout({
 }: {
   children: React.ReactNode;
 }) {
+  console.log('HomeLayout');
   return (
     <main>
       <Hero />
