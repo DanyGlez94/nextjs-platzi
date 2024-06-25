@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import styles from './MainProducts.module.sass';
-import { type Product } from '../../../types';
+import { type ProductType } from '../../../../types';
 
 export const MainProducts = async () => {
   const response = await fetch('http://localhost:3000/api');
@@ -10,7 +10,7 @@ export const MainProducts = async () => {
     <section className={styles.MainProducts}>
       <h3>✨ New products released!</h3>
       <div className={styles.MainProducts__grid}>
-        {products?.map((product: Product) => {
+        {products?.map((product: ProductType) => {
           const imageSrc = product.images[0].src;
           return (
             <article key={product.id}>

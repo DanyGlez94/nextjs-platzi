@@ -1,9 +1,9 @@
 'use client';
 import Image from 'next/image';
 import styles from 'app/sass/global-error.module.sass';
-import { ErrorProps } from '../types';
+import { ErrorPageProps } from '../../types';
 
-export default function GlobalError({ reset }: ErrorProps) {
+export default function GlobalError({ reset }: ErrorPageProps) {
   return (
     <main className={styles.Error}>
       <h1 className={styles.Error__title}>Oops! Something went wrong.</h1>

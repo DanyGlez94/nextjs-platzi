@@ -2,7 +2,11 @@
 
 import { useEffect } from 'react';
 import styles from './error.module.sass';
-import { ErrorProps } from '../../types';
+
+interface ErrorProps {
+  error: Error;
+  reset: () => void;
+}
 
 export default function Error({ error, reset }: ErrorProps) {
   useEffect(() => {
