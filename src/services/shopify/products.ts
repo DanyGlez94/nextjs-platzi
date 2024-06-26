@@ -1,5 +1,5 @@
-import { shopifyUrls } from './urls';
 import { env } from 'app/config/env';
+import { shopifyUrls } from './urls';
 
 export const getProducts = async () => {
   try {

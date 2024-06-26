@@ -1,5 +1,5 @@
-import { ProductsWrapper } from "app/components/store/ProductsWrapper";
-import { getProducts } from "app/services/shopify";
+import { ProductsWrapper } from "app/components/Store/ProductsWrapper";
+import { getProducts } from "app/services/shopify/products";
 
 interface ICategoryProps {
   params: {
@@ -12,7 +12,6 @@ interface ICategoryProps {
 
 export default async function Category(props: ICategoryProps) {
   const products = await getProducts();
-  const { categories } = props.params;
   return (
     <ProductsWrapper products={products}/>
   )
