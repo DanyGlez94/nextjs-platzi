@@ -1,31 +1,43 @@
 import { env } from 'app/config/env';
 import { shopifyUrls } from './urls';
+import axios from 'axios';
 
 export const getCollections = async () => {
   try {
-    const res = await fetch(shopifyUrls.collections.all, {
+    const res = await axios.get(shopifyUrls.collections.all, {
       headers: {
         'X-Shopify-Access-Token': env.SHOPIFY_TOKEN,
+        'Content-Type': 'application/json',
       },
     });
-    const text = await res.text();
 
-    // Intentar encontrar la parte JSON en el texto crudo
-    const jsonStart = text.indexOf('{"smart_collections":');
-    const jsonEnd = text.lastIndexOf('}') + 1;
-    if (jsonStart === -1 || jsonEnd === -1) {
-      throw new Error('JSON start or end not found in the response.');
-    }
+    const { data } = res;
 
-    const jsonText = text.substring(jsonStart, jsonEnd);
-
-    const { smart_collections } = await JSON.parse(jsonText);
+    const { smart_collections } = data;
     const transformedCollections = smart_collections.map((collection: any) => ({
       id: collection.id,
       title: collection.title,
       handle: collection.handle,
     }));
     return transformedCollections;
+  } catch (error) {
+    console.error('Fetch error:', error);
+  }
+};
+
+export const getCollectionProducts = async (collectionId: string) => {
+  try {
+    const res = await axios.get(shopifyUrls.collections.products(collectionId), {
+      headers: {
+        'X-Shopify-Access-Token': env.SHOPIFY_TOKEN,
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const { data } = res;
+
+    const { products } = data;
+    return products;
   } catch (error) {
     console.error('Fetch error:', error);
   }
