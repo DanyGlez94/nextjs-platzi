@@ -1,19 +1,22 @@
 import { env } from 'app/config/env';
 import { shopifyUrls } from './urls';
 import { ProductType } from '../../../types';
+import axios from 'axios';
 
 export const getProducts = async (id?: string): Promise<ProductType[]> => {
   try {
     const apiUrl = id
       ? `${shopifyUrls.products.all}?ids=${id}`
       : shopifyUrls.products.all;
-    const res = await fetch(apiUrl, {
-      method: 'GET',
-      headers: new Headers({
+    const res = await axios.get(apiUrl, {
+      headers: ({
         'X-Shopify-Access-Token': env.SHOPIFY_TOKEN,
+        'Content-Type': 'application/json',
       }),
     });
-    const { products } = await res.json();
+
+    const { data } = res;
+    const { products } = data;
 
     const transformedProducts = products.map((product: any) => {
       return {
