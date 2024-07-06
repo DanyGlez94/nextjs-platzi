@@ -41,10 +41,14 @@ export const getMainProducts = async () => {
     headers: new Headers({
       'X-Shopify-Access-Token': env.SHOPIFY_TOKEN,
     }),
-    cache: 'no-cache', // this is for not caching the response in the browser cache memory
+    cache: 'force-cache', // this is for forcing the browser to cache the response in the browser cache memory
+    // cache: 'no-cache', // this is for not caching the response in the browser cache memory
     // next: {
     //   revalidate: 10, // revalidate every 10 seconds for new data from the server
     // }
+    next: {
+      tags: ['main-products'],
+    },
   });
 
   const { products } = await response.json();

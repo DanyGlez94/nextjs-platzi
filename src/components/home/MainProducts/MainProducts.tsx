@@ -5,7 +5,6 @@ import { type ProductType } from '../../../../types';
 
 export const MainProducts = async () => {
   const products = await getMainProducts();
-  console.log("🚀 ~ MainProducts ~ products:", products)
 
   return (
     <section className={styles.MainProducts}>
