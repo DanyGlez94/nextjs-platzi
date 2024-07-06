@@ -8,10 +8,10 @@ export const NewAccountForm: FC = () => {
   const [errors, setErrors] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    handleCreateUser(formData);
+    await handleCreateUser(formData);
   }
 
   return (
@@ -20,13 +20,13 @@ export const NewAccountForm: FC = () => {
       <form className={styles.NewAccountForm__form} onSubmit={handleSubmit}>
         <input
           type="text"
-          name="first_name"
+          name="firstName"
           placeholder="Name"
           disabled={loading}
         />
         <input
           type="text"
-          name="last_name"
+          name="lastName"
           placeholder="Lastname"
           disabled={loading}
         />
