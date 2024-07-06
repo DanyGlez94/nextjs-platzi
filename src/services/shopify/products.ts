@@ -4,7 +4,9 @@ import { ProductType } from '../../../types';
 
 export const getProducts = async (id?: string): Promise<ProductType[]> => {
   try {
-    const apiUrl = id ? `${shopifyUrls.products.all}?id=${id}` : shopifyUrls.products.all;
+    const apiUrl = id
+      ? `${shopifyUrls.products.all}?ids=${id}`
+      : shopifyUrls.products.all;
     const res = await fetch(apiUrl, {
       method: 'GET',
       headers: new Headers({
@@ -30,5 +32,22 @@ export const getProducts = async (id?: string): Promise<ProductType[]> => {
     return transformedProducts;
   } catch (error) {
     console.error(error);
+    throw new Error('Failed to fetch products');
   }
+};
+
+export const getMainProducts = async () => {
+  const response = await fetch(shopifyUrls.products.mainProducts, {
+    headers: new Headers({
+      'X-Shopify-Access-Token': env.SHOPIFY_TOKEN,
+    }),
+    cache: 'no-cache', // this is for not caching the response in the browser cache memory
+    // next: {
+    //   revalidate: 10, // revalidate every 10 seconds for new data from the server
+    // }
+  });
+
+  const { products } = await response.json();
+
+  return products;
 };

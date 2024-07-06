@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { ProductViewItemsOrder } from './ProductViewItemsOrder';
 import styles from './ProductView.module.sass';
+import { ProductType } from '../../../../types';
 interface ProductViewProps {
   product: ProductType;
 }

@@ -1,10 +1,10 @@
-import { getProducts } from 'app/services/shopify/products';
+import { getMainProducts } from 'app/services/shopify/products';
 import Image from 'next/image';
 import styles from './MainProducts.module.sass';
 import { type ProductType } from '../../../../types';
 
 export const MainProducts = async () => {
-  const products = await getProducts();
+  const products = await getMainProducts();
   console.log("🚀 ~ MainProducts ~ products:", products)
 
   return (
