@@ -10,7 +10,7 @@ type CustomerCreateResponse = {
       field: string;
       message: string;
     }[];
-    customer: {
+    customer?: {
       firstName: string;
     };
   };
