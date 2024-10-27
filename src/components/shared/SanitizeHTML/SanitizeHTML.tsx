@@ -1,5 +1,4 @@
-import { createElement } from 'react';
-import { HTMLAttributes } from 'react';
+import { createElement, HTMLAttributes } from 'react';
 import sanitizeHtml from 'sanitize-html';
 
 type SanitizeHTMLProps = {

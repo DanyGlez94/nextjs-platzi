@@ -1,8 +1,7 @@
 'use client';
-import { useState, FC } from 'react';
+import { useState, FC, FormEvent } from 'react';
 import styles from './NewAccountForm.module.sass';
 import { handleCreateUser } from 'app/actions';
-import { FormEvent } from 'react';
 
 export const NewAccountForm: FC = () => {
   const [errors, setErrors] = useState<string[]>([]);

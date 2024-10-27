@@ -15,8 +15,7 @@ export const getProducts = async (id?: string): Promise<ProductType[]> => {
       }),
     });
 
-    const { data } = res;
-    const { products } = data;
+    const { data : { products } } = res;
 
     const transformedProducts = products.map((product: any) => {
       return {
