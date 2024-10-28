@@ -33,7 +33,7 @@ export const handleCreateUser = async (formData: FormData) => {
   };
 
   const {
-    customerCreate: { customerErrors, customer },
+    customerCreate: { customer },
   }: CustomerCreateResponse = await graphqlClient.request(
     createUserMutation,
     variables

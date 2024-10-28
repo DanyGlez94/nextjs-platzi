@@ -2,6 +2,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import styles from 'app/sass/not-found.module.sass';
 
+export const dynamic = "force-dynamic";
+
 export default function NotFound() {
   return (
     <main className={styles.NotFound}>
