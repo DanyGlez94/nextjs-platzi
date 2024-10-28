@@ -2,33 +2,60 @@
 import { useState } from 'react';
 import { FaShoppingCart } from 'react-icons/fa';
 import { useShoppingCart } from 'app/hooks/useShoppingCart';
+import { ShoppingCartItem } from './ShopingCartItem';
+import { handleCreateCart } from 'app/actions';
 import styles from './ShoppingCart.module.sass';
 
-export const ShoppingCart = () => {
+export default function ShoppingCart() {
   const { cart } = useShoppingCart();
+  const [isBuying, setIsBuying] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const hasItems = cart.length > 0;
 
   const handleOpen = () => {
-    setIsOpen(!isOpen);
+    if (hasItems) {
+      setIsOpen(!isOpen);
+    }
+  };
+
+  const handleBuy = async () => {
+    try {
+      setIsBuying(true);
+      const checkoutURL = await handleCreateCart(cart);
+      if (!checkoutURL) {
+        throw new Error('Error creating checkout');
+      }
+      window.localStorage.removeItem('cart');
+      window.location.href = checkoutURL;
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsBuying(false);
+    }
   };
 
   return (
-    <button className={styles.ShoppingCart} onClick={handleOpen}>
-      <span className={styles.ShoppingCart__counter}>{cart.length}</span>
-      <FaShoppingCart />
-      {isOpen && (
+    <div className={styles.ShoppingCart}>
+      {hasItems && (
+        <span className={styles.ShoppingCart__counter}>{cart.length}</span>
+      )}
+      <button className={styles.ShoppingCart__cart} onClick={handleOpen}>
+        <FaShoppingCart />
+      </button>
+      {isOpen && hasItems && (
         <div className={styles.ShoppingCart__items}>
-          {cart.map((item, index) => (
-            <div key={`${item.id}-${index}`}>
-              <p>{item.title}</p>
-              <p>Quantity: {item.quantity}</p>
-            </div>
+          {cart.map((item) => (
+            <ShoppingCartItem key={item.id} item={item} />
           ))}
-          <div className={styles.ShoppingCart__buyButton} role='button' tabIndex={0}>
+          <button
+            onClick={handleBuy}
+            className={styles.ShoppingCart__buyButton}
+            disabled={isBuying}
+          >
             Buy
-          </div>
+          </button>
         </div>
       )}
-    </button>
+    </div>
   );
-};
+}
