@@ -5,9 +5,9 @@ export default async function MyAccountPage() {
   return (
     <div>
       <section>
-        <h2>Your info</h2>
-        <h1>Bienvenido {customer?.firstName}</h1>
-        <p>email: {customer?.email}</p>
+        <h2 style={{ marginTop: 0 }}>Your info</h2>
+        <h1>Bienvenido, {customer?.firstName}.</h1>
+        <p>Email: {customer?.email}</p>
       </section>
     </div>
   );
