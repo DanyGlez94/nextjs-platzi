@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 
+import WithBundleAnalyzer from '@next/bundle-analyzer';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -21,4 +22,6 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+export default WithBundleAnalyzer({
+  enabled: process.env.ANALYZE === 'true',
+})(nextConfig);
